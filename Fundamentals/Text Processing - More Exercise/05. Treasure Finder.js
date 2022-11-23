@@ -1,5 +1,5 @@
 function solve(input) {
-
+    let
 }
 solve(["1 2 1 3",
     "ikegfp'jpne)bv=41P83X@",
