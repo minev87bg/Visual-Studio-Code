@@ -5,13 +5,17 @@ function solve(input) {
     let initials = (/([#$%*&])[A-Z]+\1/g).exec(line1)[0].replace(/[#$%*&]/g, "")
     let matches = line2.match(/(\d+):((0[1-9])|[1-9]\d)/g)
     let words = line3.split(" ")
-    for (let match of matches) {
-        let char = String.fromCharCode(match.split(":")[0])
-        let length = Number(match.split(":")[1]) + 1
-        if (initials.includes(char)) {
-            words.forEach(word => {
-                if (word[0] == char && word.length == length) { console.log(word) }
-            })
+    let usedChars = []
+    for (letter of initials) {
+        for (let match of matches) {
+            let char = String.fromCharCode(match.split(":")[0])
+            let length = Number(match.split(":")[1]) + 1
+            if (char == letter && !usedChars.includes(char)) {
+                usedChars.push(char)
+                for (let word of words) {
+                    if (word[0] == char && word.length == length) { console.log(word) }
+                }
+            }
         }
     }
 }

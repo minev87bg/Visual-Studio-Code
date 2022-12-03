@@ -1,0 +1,1 @@
+str => console.log(str.toString().match(/\+[359]{3}(\s|\-)2\1[0-9]{3}\1[0-9]{4}\b/g).join(', '))

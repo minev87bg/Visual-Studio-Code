@@ -1,0 +1,1 @@
+str => console.log(str.toString().match(/\b[A-Z][a-z]+ [A-Z][a-z]+\b/g).join(' '))
