@@ -1,18 +1,18 @@
-function solve(input) {
-    let line1 = input[0].split("|")[0]
-    let line2 = input[0].split("|")[1]
-    let line3 = input[0].split("|")[2]
-    let initials = (/([#$%*&])[A-Z]+\1/g).exec(line1)[0].replace(/[#$%*&]/g, "")
-    let matches = line2.match(/(\d+):((0[1-9])|[1-9]\d)/g)
-    let words = line3.split(" ")
-    for (let match of matches) {
-        let char = String.fromCharCode(match.split(":")[0])
-        let length = Number(match.split(":")[1]) + 1
-        if (initials.includes(char)) {
-            words.forEach(word => {
-                if (word[0] == char && word.length == length) { console.log(word) }
-            })
+function messageTranslator(input) {
+    let countOfStrings = input.shift();
+    let pattern = /([\!])(?<command>[A-Za-z]{3,})\1:([\[])(?<string>[A-Za-z]{8,})([\]])/gm;
+    for (line of input) {
+        while ((validLine = pattern.exec(line))) {
+            let command = validLine.groups["command"]
+            let string = validLine.groups["string"]
+            let result = []
+            string.split("").forEach(letter => { result.push(letter.charCodeAt()) })
+            console.log(`${command}:${result.join(" ")}`)
         }
+        if (!line.match(pattern)) { console.log("The message is invalid") }
     }
 }
-solve(['Urgent"Message.TO$#POAML#|readData79:05:79:0!2reme80:03--23:11{79:05}tak{65:11ar}!77:!23--)77:05ACCSS76:05ad|Remedy Por Ostream :Istream Post sOffices Office Of Ankh-Morpork MR.LIPWIG Mister Lipwig'])
+messageTranslator([
+    "2",
+    "!Send!:[IvanisHere]",
+    "*Time@:[Itis5amAlready"]);
