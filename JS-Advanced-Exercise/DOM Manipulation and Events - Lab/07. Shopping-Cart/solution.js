@@ -6,14 +6,14 @@ function solve() {
    let checkout = document.getElementsByClassName('checkout')[0]
 
    for (let item of products) {
-      let name = Array.from(item.getElementsByClassName('product-title'))
+      let name = Array.from(item.getElementsByClassName('product-title'))[0].textContent
       let price = Number(Array.from(item.getElementsByClassName('product-line-price'))[0].textContent)
       let addBtn = item.getElementsByClassName('add-product')
 
       addBtn[0].addEventListener('click', () => {
-         cart.value += `Added ${name[0].textContent} for ${price.toFixed(2)} to the cart.\n`
+         cart.value += `Added ${name} for ${price.toFixed(2)} to the cart.\n`
          totalPrice += Number(price)
-         if (!list.includes(name)) { list.push(name[0].textContent) }
+         if (!list.includes(name)) { list.push(name) }
       })
    }
    checkout.addEventListener('click', () => {
